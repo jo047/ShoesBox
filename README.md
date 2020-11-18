@@ -15,7 +15,7 @@
   ・Ruby on Rails<br>
     CRUD処理<br>
     ユーザー認証(devise)<br>
-    いいね機能（<br>
+    いいね機能<br>
     コメント機能<br>
     画像アップロード（refile）<br>
     検索機能(Ransack)<br>
