@@ -1,0 +1,37 @@
+<section class="sct-color-1 slice">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 post_images_container">
+        <div class="post-item">
+          <div class="post-meta-top">
+            <div class="post-image">
+              <%= attachment_image_tag @shoes_post, :shoes_image, :fill, 300, 300 %>
+            </div>
+          </div>
+          <div class="post-content">
+            <h2 class="post-title"><%= @shoes_post.shoes_name %></h2>
+            <ul class="meta-info-cells v4 float-wrapper">
+              <li>
+                <i class="fa fa-user"></i>By<a href="#">
+                <%= @shoes_post.user.name %></a>
+              </li>
+              <li>
+                <i class="fa fa-calendar"></i><%= @shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
+              </li>
+              <% if @shoes_post.user == current_user %>
+                <%= link_to "削除", shoes_post_path(@shoes_post), method: :delete %>
+              <% end %>
+              </li>
+            </ul>
+            <div class="post-content-inner mt-20">
+              <p><%= @shoes_post.brand_name %></p>
+              <p><%= @shoes_post.purchase_store %></p>
+              <p><%= @shoes_post.shoes_introduction %></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</section>
