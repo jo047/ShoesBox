@@ -20,6 +20,7 @@ class ShoesPostsController < ApplicationController
 
   def show
     @shoes_post = ShoesPost.find(params[:id])
+    @shoes_comment = ShoesComment.new
   end
 
   def destroy

@@ -29,6 +29,9 @@
                     <li>
                       <%= shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
                     </li>
+                    <li>
+                      <%= shoes_post.shoes_comments.count %>コメント
+                    </li>
                   </ul>
                 </div>
               </div>

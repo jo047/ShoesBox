@@ -10,6 +10,30 @@
           </div>
           <div class="post-content">
             <h2 class="post-title"><%= @shoes_post.shoes_name %></h2>
+            <!--コメント件数-->
+            <div class="comment-list bt style-2" id="comments">
+              <div class="float-wrapper">
+                <h2 class="comment-count"><%= @shoes_post.shoes_comments.count %>件コメント</h2>
+              </div>
+            </div>
+            <!--コメント件数ここまで-->
+            <!--いいね-->
+            <% if @shoes_post.favorited_by?(current_user) %>
+              <li>
+                <%= link_to shoes_post_shoes_favorites_path(@shoes_post), method: :delete do %>
+                  <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                  <%= @shoes_post.shoes_favorites.count %> いいね
+                <% end %>
+              </li>
+              <% else %>
+              <li>
+                <%= link_to shoes_post_shoes_favorites_path(@shoes_post), method: :post do %>
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                  <%= @shoes_post.shoes_favorites.count %> いいね
+                <% end %>
+              </li>
+            <% end %>
+            <!--いいねここまで-->
             <ul class="meta-info-cells v4 float-wrapper">
               <li>
                 <i class="fa fa-user"></i>By<a href="#">
@@ -31,6 +55,46 @@
           </div>
         </div>
         <hr>
+        <!--コメント本文-->
+        <ol>
+          <% @shoes_post.shoes_comments.each do |shoes_comment| %>
+            <li class="comment">
+              <div class="comment-body bb">
+                <div class="comment-avatar">
+                  <div class="avatar">
+                    <%= image_tag('noimage.jpeg', style: "width: 60px; height: 60px;") %>
+                  </div>
+                </div>
+                <div class="comment-text">
+                  <div class="comment-author clearfix">
+                    <a href="#" class="link-author"><%= shoes_comment.user.name %></a>
+                    <span class="comment-meta">
+                      <span class="comment-date"><%= shoes_comment.created_at.strftime('%Y/%m/%d') %></span>
+                    </span>
+                  </div>
+                  <div class="comment-entry"><%= shoes_comment.comment %></div>
+                  <% if shoes_comment.user == current_user %>
+                    <div>
+                      <%= link_to "削除", shoes_post_shoes_comment_path(shoes_comment.shoes_post, shoes_comment), method: :delete, class: "btn btn-danger pull-right" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ol>
+        <!--コメント本文ここまで-->
+        <!--コメント入力フォーム-->
+        <%= form_with(model:[@shoes_post, @shoes_comment], local: true) do |f| %>
+          <div class="row">
+            <div class="col-sm-12">
+              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+            </div>
+          </div>
+          <br>
+          <%= f.submit "コメントする", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+        <% end %>
+        <!--コメント入力フォームここまで-->
       </div>
     </div>
   </div>
