@@ -1,2 +1,55 @@
 <h1>ユーザー情報</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<!-- ここから -->
+<div class="profile-container">
+  <h3 class="profile-name"><%= @user.name %></h3>
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "noimage.jpeg" %>
+</div>
+<% if @user.id == current_user.id %>
+  <p><%= link_to "ユーザー情報編集", edit_user_path(@user), class: "pull-right" %></p>
+<% end %>
+<!-- ここまでを追加 -->
+<section class="sct-color-1 slice">
+  <div class="container-fluid masonry-container">
+    <div class="row">
+      <h1>靴一覧</h1>
+      <div class="col-md-8 col-sm-offset-2">
+        <div class="masonry-wrapper-cols">
+          <div class="masonry-gutter"></div>
+
+          <% @shoes_posts.each do |shoes_post| %>
+            <div class="masonry-block">
+              <div class="block block-image v1">
+                <div class="block-image">
+                  <div class="view view-first">
+                    <%= attachment_image_tag shoes_post, :shoes_image, :fill, 300, 300 %>
+                  </div>
+                </div>
+                <div class="block-content">
+
+                  <h3 class="block-title">
+                    <%= link_to shoes_post_path(shoes_post.id) do %>
+                      <i class="fa fa-map-marker"></i><%= shoes_post.shoes_name %>
+                    <% end %>
+                  </h3>
+                  <p><%= shoes_post.brand_name %></p>
+                  <ul class="inline-meta">
+                    <li>By
+                      <%= shoes_post.user.name %>
+                    </li>
+                    <li>
+                      <%= shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
+                    </li>
+                    <li>
+                      <%= shoes_post.shoes_comments.count %>コメント
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <%= paginate @shoes_posts %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

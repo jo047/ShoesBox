@@ -36,7 +36,10 @@
             <!--いいねここまで-->
             <ul class="meta-info-cells v4 float-wrapper">
               <li>
-                <i class="fa fa-user"></i>By<a href="#">
+                <%= attachment_image_tag @shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpeg" %>
+              </li>
+              <li>
+                <i class="fa fa-user"></i>投稿者<a href="#">
                 <%= @shoes_post.user.name %></a>
               </li>
               <li>

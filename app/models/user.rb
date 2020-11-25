@@ -6,4 +6,7 @@ class User < ApplicationRecord
   has_many :shoes_posts, dependent: :destroy
   has_many :shoes_comments, dependent: :destroy
   has_many :shoes_favorites, dependent: :destroy
+
+  attachment :profile_image
+
 end

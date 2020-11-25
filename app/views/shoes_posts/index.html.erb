@@ -23,6 +23,7 @@
                   </h3>
                   <p><%= shoes_post.brand_name %></p>
                   <ul class="inline-meta">
+                    <%= attachment_image_tag shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpeg", class: "img-circle pull-left profile-thumb" %>
                     <li>By
                       <%= shoes_post.user.name %>
                     </li>
@@ -37,6 +38,7 @@
               </div>
             </div>
           <% end %>
+          <%= paginate @shoes_posts %>
         </div>
       </div>
     </div>

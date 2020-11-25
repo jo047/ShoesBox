@@ -9,13 +9,16 @@ class ShoesPostsController < ApplicationController
   def create
     @shoes_post = ShoesPost.new(shoes_post_params)
     @shoes_post.user_id = current_user.id
-    @shoes_post.save
-    redirect_to shoes_posts_path
+    if @shoes_post.save
+      redirect_to shoes_posts_path
+    else
+      render :new
+    end
   end
 
   # 投稿一覧
   def index
-    @shoes_posts = ShoesPost.all
+    @shoes_posts = ShoesPost.page(params[:page]).reverse_order
   end
 
   def show
