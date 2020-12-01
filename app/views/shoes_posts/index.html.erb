@@ -6,7 +6,7 @@
         <div class="masonry-wrapper-cols">
           <div class="masonry-gutter"></div>
 
-          <% @shoes_posts.each do |shoes_post| %>
+          <% @search_shoes_posts.each do |shoes_post| %>
             <div class="masonry-block">
               <div class="block block-image v1">
                 <div class="block-image">
@@ -23,7 +23,7 @@
                   </h3>
                   <p><%= shoes_post.brand_name %></p>
                   <ul class="inline-meta">
-                    <%= attachment_image_tag shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpg", class: "img-circle pull-left profile-thumb" %>
+                    <%= attachment_image_tag shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpg", size:'60x60', class: "img-circle pull-left profile-thumb" %>
                     <li>By
                       <%= shoes_post.user.name %>
                     </li>
