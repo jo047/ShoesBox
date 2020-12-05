@@ -2,91 +2,53 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 post_images_container">
-        <div class="post-item">
-          <div class="post-meta-top">
-            <div class="post-image">
-              <%= attachment_image_tag @shoes_post, :shoes_image, :fill, 300, 300 %>
-            </div>
-          </div>
-          <div class="post-content">
-            <h2 class="post-title"><%= @shoes_post.shoes_name %></h2>
-            <!--コメント件数-->
-            <div class="comment-list bt style-2" id="comments">
-              <div class="float-wrapper">
-                <h2 class="comment-count"><%= @shoes_post.shoes_comments.count %>件コメント</h2>
-              </div>
-            </div>
-            <!--コメント件数ここまで-->
-           <!--部分テンプレートのいいねを入れる-->
-           <div id="shoes_post_<%= @shoes_post.id %>">
-           <div class="favorite-btn"><%= render 'shoes_favorites/favorites', shoes_post: @shoes_post %></div>
-           </div>
-           <!---->
-            <ul class="meta-info-cells v4 float-wrapper">
-              <li>
-                <%= attachment_image_tag @shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpeg" %>
-              </li>
-              <li>
-                <i class="fa fa-user"></i>投稿者<a href="#">
-                <%= @shoes_post.user.name %></a>
-              </li>
-              <li>
-                <i class="fa fa-calendar"></i><%= @shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
-              </li>
-              <% if @shoes_post.user == current_user %>
-                <%= link_to "投稿を削除", shoes_post_path(@shoes_post), method: :delete %>
-              <% end %>
-              </li>
-            </ul>
-            <div class="post-content-inner mt-20">
-              <p><%= @shoes_post.brand_name %></p>
-              <p><%= @shoes_post.purchase_store %></p>
-              <p><%= @shoes_post.shoes_introduction %></p>
-            </div>
+        <div class="post-image">
+        <%= attachment_image_tag @shoes_post, :shoes_image, :fill, 300, 300 %>
+        </div>
+
+        <h2 class="post-title"><%= @shoes_post.shoes_name %></h2>
+        <!--コメント件数-->
+        <div class="comment-list bt style-2" id="comments">
+          <div class="float-wrapper">
+            <h2 class="comment-count"><%= @shoes_post.shoes_comments.count %>件コメント</h2>
           </div>
         </div>
-        <hr>
-        <!--コメント本文-->
-        <ol>
-          <% @shoes_post.shoes_comments.each do |shoes_comment| %>
-            <li class="comment">
-              <div class="comment-body bb">
-                <div class="comment-avatar">
-                  <div class="avatar">
-                    <%= image_tag('noimage.jpeg', style: "width: 60px; height: 60px;") %>
-                  </div>
-                </div>
-                <div class="comment-text">
-                  <div class="comment-author clearfix">
-                    <a href="#" class="link-author"><%= shoes_comment.user.name %></a>
-                    <span class="comment-meta">
-                      <span class="comment-date"><%= shoes_comment.created_at.strftime('%Y/%m/%d') %></span>
-                    </span>
-                  </div>
-                  <div class="comment-entry"><%= shoes_comment.comment %></div>
-                  <% if shoes_comment.user == current_user %>
-                    <div>
-                      <%= link_to "コメント削除", shoes_post_shoes_comment_path(shoes_comment.shoes_post, shoes_comment), method: :delete, class: "btn btn-danger pull-right" %>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
+        <!--コメント件数ここまで-->
+        <!--部分テンプレートのいいねを入れる-->
+        <div id="shoes_post_<%= @shoes_post.id %>">
+          <div class="favorite-btn"><%= render 'shoes_favorites/favorites', shoes_post: @shoes_post %></div>
+          <!--いいねここまで-->
+          <ul class="meta-info-cells v4 float-wrapper">
+            <li>
+              <%= attachment_image_tag @shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpeg" %>
             </li>
-          <% end %>
-        </ol>
-        <!--コメント本文ここまで-->
-        <!--コメント入力フォーム-->
-        <%= form_with(model:[@shoes_post, @shoes_comment], local: true) do |f| %>
-          <div class="row">
-            <div class="col-sm-12">
-              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-            </div>
+            <li>
+              <i class="fa fa-user"></i>投稿者<a href="#">
+            <%= @shoes_post.user.name %></a>
+            </li>
+            <li>
+              <i class="fa fa-calendar"></i><%= @shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
+            </li>
+            <li>
+              <% if @shoes_post.user == current_user %>
+              <%= link_to "投稿を削除", shoes_post_path(@shoes_post), method: :delete %>
+              <% end %>
+            </li>
+          </ul>
+          <div class="post-content-inner mt-20">
+            <p><%= @shoes_post.brand_name %></p>
+            <p><%= @shoes_post.purchase_store %></p>
+            <p><%= @shoes_post.shoes_introduction %></p>
           </div>
+          <hr>
+          <!--コメント一覧・投稿・削除-->
+          <div class="Shoes_comments_area">
+            <%= render 'shoes_comments/comments', shoes_comment: @shoes_comment, shoes_post: @shoes_post %>
+          </div>
+          <!--コメント一覧・投稿ここまで-->
+        </div>
           <br>
-          <%= f.submit "コメントする", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-        <% end %>
-        <!--コメント入力フォームここまで-->
-        <br>
+        </div>
       </div>
     </div>
   </div>

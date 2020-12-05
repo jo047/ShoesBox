@@ -16,6 +16,9 @@ class ApplicationController < ActionController::Base
     @search_shoes_posts = @search.result.page(params[:page]).reverse_order
   end
 
+  # def set_q_for_shoes_post
+  #   @q_header = ShoesPost.ransack(params[:q])
+  # end
 
   protected
   def configure_permitted_parameters

@@ -2,6 +2,7 @@
   <div class="container-fluid masonry-container">
     <div class="row">
       <h1>靴一覧</h1>
+
       <div class="col-md-8 col-sm-offset-2">
         <div class="masonry-wrapper-cols">
           <div class="masonry-gutter"></div>
@@ -11,11 +12,12 @@
               <div class="block block-image v1">
                 <div class="block-image">
                   <div class="view view-first">
-                    <%= attachment_image_tag shoes_post, :shoes_image, :fill, 300, 300 %>
+                    <%= link_to shoes_post_path(shoes_post.id) do %>
+                      <%= attachment_image_tag shoes_post, :shoes_image, :fill, 300, 300 %>
+                    <% end %>
                   </div>
                 </div>
                 <div class="block-content">
-
                   <h3 class="block-title">
                     <%= link_to shoes_post_path(shoes_post.id) do %>
                       <i class="fa fa-map-marker"></i><%= shoes_post.shoes_name %>

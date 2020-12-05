@@ -1,0 +1,41 @@
+<!--コメント一覧-->
+          <ol>
+            <% shoes_post.shoes_comments.each do |shoes_comment| %>
+              <li class="comment">
+                <div class="comment-body bb">
+                  <div class="comment-avatar">
+                    <div class="avatar">
+                      <%= image_tag('noimage.jpeg', style: "width: 60px; height: 60px;") %>
+                    </div>
+                  </div>
+                  <div class="comment-text">
+                    <div class="comment-author clearfix">
+                      <a href="#" class="link-author"><%= shoes_comment.user.name %></a>
+                      <span class="comment-meta">
+                        <span class="comment-date"><%= shoes_comment.created_at.strftime('%Y/%m/%d') %></span>
+                      </span>
+                    </div>
+                    <div class="comment-entry"><%= shoes_comment.comment %></div>
+                    <% if shoes_comment.user == current_user %>
+                      <div>
+                        <%= link_to "コメント削除", shoes_post_shoes_comment_path(shoes_comment.shoes_post, shoes_comment), method: :delete, remote: true, class: "btn btn-danger pull-right" %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ol>
+          <!--コメント本文ここまで-->
+          <!--コメント入力フォーム-->
+
+          <%= form_with(model:[shoes_post, shoes_comment], data: {remote: true}) do |f| %>
+            <div class="row">
+              <div class="col-sm-12">
+                <%= f.text_area :comment, rows:'5', class: "form-control", id: "comment_textarea", placeholder: "コメントをここに" %>
+              </div>
+            </div>
+            <br>
+            <%= f.submit "コメントする", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+          <% end %>
+          <!--コメント入力フォームここまで-->

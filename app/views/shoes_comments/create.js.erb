@@ -1,0 +1,4 @@
+
+$("#shoes_post_<%= @shoes_post.id %> .comments-count").html("<%= @shoes_post.shoes_comments.count %>件コメント");
+$("#shoes_post_<%= @shoes_post.id %> .Shoes_comments_area").html("<%= j(render 'shoes_comments/comments', shoes_comment: ShoesComment.new, shoes_post: @shoes_post) %>");
+$("#comment_textarea").val("");
