@@ -16,6 +16,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .navbar-logo {
   position: absolute;
   top: 10px;
@@ -23,7 +29,9 @@
   text-decoration: none;
 }
 
-body { padding-top: 70px; }
+body {
+  padding-top: 100px;
+}
 
 // footer {
 //   position: absolute;

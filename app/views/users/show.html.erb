@@ -1,56 +1,36 @@
-<h1>ユーザー情報</h1>
-<!-- ここから -->
-<div class="profile-container">
-  <h3 class="profile-name"><%= @user.name %></h3>
-  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, class: "img-circle pull-left profile-img", fallback: "noimage.jpg" %>
-</div>
-<% if @user.id == current_user.id %>
-  <p><%= link_to "ユーザー情報編集", edit_user_path(@user), class: "pull-right" %></p>
-<% end %>
-<!-- ここまでを追加 -->
-<section class="sct-color-1 slice">
-  <div class="container-fluid masonry-container">
-    <div class="row">
-      
-      <h1>靴一覧</h1>
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-          <div class="masonry-gutter"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1 class="user-info-title">ユーザー情報</h1>
+      <div class= "user-info">
+        <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, class: "img-circle pull-left profile-img", fallback: "noimage.jpg" %>
+        <h3 class="profile-name">ユーザー名　<%= @user.name %></h3>
+        <p>自己紹介文　<%= @user.self_introduction %></p>
+        <% if @user.id == current_user.id %>
+          <%= link_to "ユーザー情報編集", edit_user_path(@user), class: "btn btn-info" %>
+        <% end %>
+      </div>
 
-          <% @shoes_posts.each do |shoes_post| %>
-            <div class="masonry-block">
-              <div class="block block-image v1">
-                <div class="block-image">
-                  <div class="view view-first">
-                    <%= attachment_image_tag shoes_post, :shoes_image, :fill, 300, 300 %>
-                  </div>
-                </div>
-                <div class="block-content">
 
-                  <h3 class="block-title">
-                    <%= link_to shoes_post_path(shoes_post.id) do %>
-                      <i class="fa fa-map-marker"></i><%= shoes_post.shoes_name %>
-                    <% end %>
-                  </h3>
-                  <p><%= shoes_post.brand_name %></p>
-                  <ul class="inline-meta">
-                    <li>By
-                      <%= shoes_post.user.name %>
-                    </li>
-                    <li>
-                      <%= shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
-                    </li>
-                    <li>
-                      <%= shoes_post.shoes_comments.count %>コメント
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          <% end %>
-          <%= paginate @shoes_posts %>
+      <h1 class="user-shoes-post-title"><%= @user.name %>さんの靴一覧</h1>
+      <div class ="user-shoes-list">
+        <% @shoes_posts.each do |shoes_post| %>
+        <%= link_to shoes_post_path(shoes_post.id) do %>
+        <%= attachment_image_tag shoes_post, :shoes_image, :fill, 300, 300 %>
+        <div class="shoes_name">
+          <p>靴名：<%= shoes_post.shoes_name.truncate(23) %></p>
+        <% end %>
+          <p>ブランド名<%= shoes_post.brand_name.truncate(23) %></p>
+          <span><%= shoes_post.shoes_comments.count %>コメント</span>
+          <span><%= shoes_post.shoes_favorites.count %>いいね</span>
         </div>
+        <p>投稿日：　<%= shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %></p>
+        <br>
+        <br>
+        <br>
+        <% end %>
+        <%= paginate @shoes_posts %>
       </div>
     </div>
   </div>
-</section>
+</div>

@@ -21,17 +21,10 @@ class ShoesPostsController < ApplicationController
     @shoes_posts = ShoesPost.page(params[:page]).reverse_order
   end
 
-  # def index
-  #   @q = ShoesPost.ransack(params[:q])
-  #   @shoes_posts = @q.result(distinct: true)
-  #   if @q_header
-  #     @@shoes_posts = @q_header.result(distinct: true)
-  #   end
-  # end
-
   def show
     @shoes_post = ShoesPost.find(params[:id])
     @shoes_comment = ShoesComment.new
+
   end
 
   def destroy

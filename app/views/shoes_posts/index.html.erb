@@ -1,47 +1,45 @@
-<section class="sct-color-1 slice">
-  <div class="container-fluid masonry-container">
+<section class="shoes-posts">
+  <div class="container">
     <div class="row">
-      <h1>靴一覧</h1>
+      <div class="col-md-6 col-md-offset-3">
+      <h1 class="shoesposts">靴投稿一覧</h1>
 
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-          <div class="masonry-gutter"></div>
-
-          <% @search_shoes_posts.each do |shoes_post| %>
-            <div class="masonry-block">
-              <div class="block block-image v1">
-                <div class="block-image">
-                  <div class="view view-first">
+          <div class="shoes-list">
+              <% @search_shoes_posts.each do |shoes_post| %>
+                <%= link_to shoes_post_path(shoes_post.id) do %>
+                  <%= attachment_image_tag shoes_post, :shoes_image, :fill, 300, 300 %>
+                <% end %>
+                  <div class="name">
                     <%= link_to shoes_post_path(shoes_post.id) do %>
-                      <%= attachment_image_tag shoes_post, :shoes_image, :fill, 300, 300 %>
+                      <p>靴名
+                      <%= shoes_post.shoes_name.truncate(23) %>
+                      </p>
                     <% end %>
+                    <p>ブランド名
+                    <%= shoes_post.brand_name.truncate(23) %>
+                    </p>
                   </div>
-                </div>
-                <div class="block-content">
-                  <h3 class="block-title">
-                    <%= link_to shoes_post_path(shoes_post.id) do %>
-                      <i class="fa fa-map-marker"></i><%= shoes_post.shoes_name %>
+                  <span>
+                    <%= shoes_post.shoes_comments.count %>コメント
+                  </span>
+                  <span>
+                    <%= shoes_post.shoes_favorites.count %>いいね
+                  </span>
+                    <p>
+                      <%= attachment_image_tag shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpg", size:'60x60', class: "img-circle pull-left profile-thumb" %>
+                    </p>
+                    <%= link_to user_path(shoes_post.user) do %>
+                      <p>投稿者：<%= shoes_post.user.name %></p>
                     <% end %>
-                  </h3>
-                  <p><%= shoes_post.brand_name %></p>
-                  <ul class="inline-meta">
-                    <%= attachment_image_tag shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpg", size:'60x60', class: "img-circle pull-left profile-thumb" %>
-                    <li>By
-                      <%= shoes_post.user.name %>
-                    </li>
-                    <li>
+                    <p>投稿日：
                       <%= shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
-                    </li>
-                    <li>
-                      <%= shoes_post.shoes_comments.count %>コメント
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          <% end %>
-          <%= paginate @shoes_posts %>
-        </div>
+                    </p>
+                    <br>
+                    <br>
+                    <br>
+              <% end %>
+              <%= paginate @shoes_posts %>
+          </div>
       </div>
     </div>
   </div>

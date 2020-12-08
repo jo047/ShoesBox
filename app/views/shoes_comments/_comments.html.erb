@@ -1,18 +1,20 @@
 <!--コメント一覧-->
           <ol>
+            <h2>みんなのコメント</h2>
             <% shoes_post.shoes_comments.each do |shoes_comment| %>
-              <li class="comment">
                 <div class="comment-body bb">
                   <div class="comment-avatar">
                     <div class="avatar">
-                      <%= image_tag('noimage.jpeg', style: "width: 60px; height: 60px;") %>
+                      <%= attachment_image_tag shoes_comment.user,:profile_image, class: "img-circle pull-left profile-img", fallback:'noimage.jpg', size: '30x30' %>
                     </div>
                   </div>
                   <div class="comment-text">
                     <div class="comment-author clearfix">
-                      <a href="#" class="link-author"><%= shoes_comment.user.name %></a>
+                      <%= link_to user_path(shoes_comment.user) do %>
+                        <p><%= shoes_comment.user.name %></p>
+                      <% end %>
                       <span class="comment-meta">
-                        <span class="comment-date"><%= shoes_comment.created_at.strftime('%Y/%m/%d') %></span>
+                        <span class="comment-date"><%= shoes_comment.created_at.strftime("%Y年%m月%d日%H時%M分") %></span>
                       </span>
                     </div>
                     <div class="comment-entry"><%= shoes_comment.comment %></div>
@@ -21,14 +23,14 @@
                         <%= link_to "コメント削除", shoes_post_shoes_comment_path(shoes_comment.shoes_post, shoes_comment), method: :delete, remote: true, class: "btn btn-danger pull-right" %>
                       </div>
                     <% end %>
+                    <br>
                   </div>
                 </div>
-              </li>
             <% end %>
           </ol>
           <!--コメント本文ここまで-->
           <!--コメント入力フォーム-->
-
+          <br>
           <%= form_with(model:[shoes_post, shoes_comment], data: {remote: true}) do |f| %>
             <div class="row">
               <div class="col-sm-12">

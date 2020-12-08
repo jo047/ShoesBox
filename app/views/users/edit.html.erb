@@ -13,3 +13,6 @@
 
     <%= f.submit "登録", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
 <% end %>
+<br>
+<br>
+<%= link_to "退会する", user_registration_path, method: :delete , "data-confirm" => "本当に消しますか?" ,class:"btn btn-lg btn-block btn-danger" %>

@@ -1,55 +1,44 @@
-<section class="sct-color-1 slice">
+<section class="shoes-show">
   <div class="container">
     <div class="row">
       <div class="col-md-12 post_images_container">
         <div class="post-image">
-        <%= attachment_image_tag @shoes_post, :shoes_image, :fill, 300, 300 %>
+          <%= attachment_image_tag @shoes_post, :shoes_image, :fill, 300, 300 %>
         </div>
-
-        <h2 class="post-title"><%= @shoes_post.shoes_name %></h2>
         <!--コメント件数-->
-        <div class="comment-list bt style-2" id="comments">
-          <div class="float-wrapper">
-            <h2 class="comment-count"><%= @shoes_post.shoes_comments.count %>件コメント</h2>
-          </div>
-        </div>
-        <!--コメント件数ここまで-->
-        <!--部分テンプレートのいいねを入れる-->
         <div id="shoes_post_<%= @shoes_post.id %>">
-          <div class="favorite-btn"><%= render 'shoes_favorites/favorites', shoes_post: @shoes_post %></div>
-          <!--いいねここまで-->
-          <ul class="meta-info-cells v4 float-wrapper">
-            <li>
-              <%= attachment_image_tag @shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpeg" %>
-            </li>
-            <li>
-              <i class="fa fa-user"></i>投稿者<a href="#">
-            <%= @shoes_post.user.name %></a>
-            </li>
-            <li>
-              <i class="fa fa-calendar"></i><%= @shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
-            </li>
-            <li>
-              <% if @shoes_post.user == current_user %>
-              <%= link_to "投稿を削除", shoes_post_path(@shoes_post), method: :delete %>
-              <% end %>
-            </li>
-          </ul>
-          <div class="post-content-inner mt-20">
-            <p><%= @shoes_post.brand_name %></p>
-            <p><%= @shoes_post.purchase_store %></p>
-            <p><%= @shoes_post.shoes_introduction %></p>
-          </div>
-          <hr>
-          <!--コメント一覧・投稿・削除-->
-          <div class="Shoes_comments_area">
-            <%= render 'shoes_comments/comments', shoes_comment: @shoes_comment, shoes_post: @shoes_post %>
-          </div>
-          <!--コメント一覧・投稿ここまで-->
-        </div>
-          <br>
+          <p class="comment-count"><%= @shoes_post.shoes_comments.count %>件コメント</p>
         </div>
       </div>
+        <!--コメント件数ここまで-->
+        <!--部分テンプレートのいいねを入れる-->
+      <div id="shoes_post_<%= @shoes_post.id %>">
+        <div class="favorite-btn"><%= render 'shoes_favorites/favorites', shoes_post: @shoes_post %></div>
+            <!--いいねここまで-->
+        <div class="post-content-inner mt-20">
+          <p>靴名　<%= @shoes_post.shoes_name %></p>
+          <p>ブランド名　<%= @shoes_post.brand_name %></p>
+          <p>購入店舗　<%= @shoes_post.purchase_store %></p>
+          <p>紹介文　<%= @shoes_post.shoes_introduction %></p>
+        </div>
+        <p><%= attachment_image_tag @shoes_post.user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-img", fallback: "noimage.jpeg" %></p>
+        <%= link_to user_path(@shoes_post.user) do %>
+          <p>投稿者名：　<%= @shoes_post.user.name %></p>
+        <% end %>
+        <p>投稿日：<%= @shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %></p>
+        <p>
+          <% if @shoes_post.user == current_user %>
+            <%= link_to "投稿を削除", shoes_post_path(@shoes_post), method: :delete , "data-confirm" => "本当に消しますか?" ,class:"btn-sm btn-danger destroy_shoes_post_#{@shoes_post.id}" %>
+          <% end %>
+        </p>
+        <hr>
+        <!--コメント一覧・投稿・削除-->
+        <div class="Shoes_comments_area">
+          <%= render 'shoes_comments/comments', shoes_comment: @shoes_comment, shoes_post: @shoes_post %>
+        </div>
+        <!--コメント一覧・投稿ここまで-->
+      </div>
+      <br>
     </div>
   </div>
 </section>
