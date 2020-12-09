@@ -1,5 +1,6 @@
 class ShoesPostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_search
 
   def new
     @shoes_post = ShoesPost.new
@@ -31,6 +32,12 @@ class ShoesPostsController < ApplicationController
     @shoes_post = ShoesPost.find(params[:id])
     @shoes_post.destroy
     redirect_to shoes_posts_path
+  end
+
+  def set_search
+    #@search = Article.search(params[:q])
+    @search = ShoesPost.ransack(params[:q]) #ransackメソッド推奨
+    @search_shoes_posts = @search.result.page(params[:page]).reverse_order
   end
 
   # 投稿データのストロングパラメータ

@@ -3,15 +3,13 @@
     <div class="col-md-6 col-md-offset-3">
       <h1 class="user-info-title">ユーザー情報</h1>
       <div class= "user-info">
-        <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, class: "img-circle pull-left profile-img", fallback: "noimage.jpg" %>
+        <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, class: "img-circle pull-left profile-img", fallback: "noimage.jpg", size:'100x100' %>
         <h3 class="profile-name">ユーザー名　<%= @user.name %></h3>
         <p>自己紹介文　<%= @user.self_introduction %></p>
         <% if @user.id == current_user.id %>
           <%= link_to "ユーザー情報編集", edit_user_path(@user), class: "btn btn-info" %>
         <% end %>
       </div>
-
-
       <h1 class="user-shoes-post-title"><%= @user.name %>さんの靴一覧</h1>
       <div class ="user-shoes-list">
         <% @shoes_posts.each do |shoes_post| %>
@@ -25,9 +23,7 @@
           <span><%= shoes_post.shoes_favorites.count %>いいね</span>
         </div>
         <p>投稿日：　<%= shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %></p>
-        <br>
-        <br>
-        <br>
+        <br><br>
         <% end %>
         <%= paginate @shoes_posts %>
       </div>

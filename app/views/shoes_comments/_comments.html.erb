@@ -17,7 +17,8 @@
                         <span class="comment-date"><%= shoes_comment.created_at.strftime("%Y年%m月%d日%H時%M分") %></span>
                       </span>
                     </div>
-                    <div class="comment-entry"><%= shoes_comment.comment %></div>
+                    <div class="comment-entry"><%= Rinku.auto_link(shoes_comment.comment, :all, 'target="_blank"').html_safe %></div>
+
                     <% if shoes_comment.user == current_user %>
                       <div>
                         <%= link_to "コメント削除", shoes_post_shoes_comment_path(shoes_comment.shoes_post, shoes_comment), method: :delete, remote: true, class: "btn btn-danger pull-right" %>
