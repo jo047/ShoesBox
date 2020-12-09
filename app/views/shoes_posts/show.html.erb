@@ -21,7 +21,7 @@
           <p>購入店舗　<%= Rinku.auto_link(@shoes_post.purchase_store, :all, 'target="_blank"').html_safe %></p>
           <p>紹介文　<%= Rinku.auto_link(@shoes_post.shoes_introduction, :all, 'target="_blank"').html_safe %></p>
         </div>
-        <p><%= attachment_image_tag @shoes_post.user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-img", fallback: "noimage.jpeg", size:'60x60' %></p>
+        <p><%= attachment_image_tag @shoes_post.user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-img", fallback: "noimage.jpg", size:'60x60' %></p>
         <%= link_to user_path(@shoes_post.user) do %>
           <p>投稿者名：　<%= @shoes_post.user.name %></p>
         <% end %>
