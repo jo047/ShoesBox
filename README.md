@@ -41,5 +41,4 @@ https://docs.google.com/spreadsheets/d/1lFGZpaDqSp0pQOz2tRKH3sPZJWjOV9Ke-wwF1iH7
 ## 使用素材
 ぱくたそ　URL:https://www.pakutaso.com/ (画像素材)
 O-DAN URL:https://o-dan.net/ja/ (画像素材)
-ICOOON MONO URL:https://icooon-mono.com/ (アイコン素材)
 designevo URL:https://www.designevo.com/ (ロゴ作成)
