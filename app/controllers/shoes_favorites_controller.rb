@@ -9,9 +9,8 @@ class ShoesFavoritesController < ApplicationController
   def destroy
     @shoes_post = ShoesPost.find(params[:shoes_post_id])
     @shoes_favorite = current_user.shoes_favorites.find_by(shoes_post_id: @shoes_post.id)
-    #byebug
+    # byebug
     @shoes_favorite.destroy
     # redirect_to shoes_post_path(shoes_post)
   end
-
 end

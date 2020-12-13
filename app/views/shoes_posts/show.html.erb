@@ -16,10 +16,15 @@
         <div class="favorite-btn"><%= render 'shoes_favorites/favorites', shoes_post: @shoes_post %></div>
             <!--いいねここまで-->
         <div class="post-content-inner mt-20">
+          <hr>
           <p>靴名　<%= @shoes_post.shoes_name %></p>
+          <hr>
           <p>ブランド名　<%= @shoes_post.brand_name %></p>
+          <hr>
           <p>購入店舗　<%= Rinku.auto_link(@shoes_post.purchase_store, :all, 'target="_blank"').html_safe %></p>
+          <hr>
           <p>紹介文　<%= Rinku.auto_link(@shoes_post.shoes_introduction, :all, 'target="_blank"').html_safe %></p>
+          <hr>
         </div>
         <p><%= attachment_image_tag @shoes_post.user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-img", fallback: "noimage.jpg", size:'60x60' %></p>
         <%= link_to user_path(@shoes_post.user) do %>
@@ -32,6 +37,8 @@
           <% end %>
         </p>
         <hr>
+        <br>
+
         <!--コメント一覧・投稿・削除-->
         <div class="Shoes_comments_area">
           <%= render 'shoes_comments/comments', shoes_comment: @shoes_comment, shoes_post: @shoes_post %>

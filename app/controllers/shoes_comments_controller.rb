@@ -1,5 +1,4 @@
 class ShoesCommentsController < ApplicationController
-
   def create
     @shoes_post = ShoesPost.find(params[:shoes_post_id])
     @shoes_comment = current_user.shoes_comments.new(shoes_comment_params)
@@ -15,6 +14,7 @@ class ShoesCommentsController < ApplicationController
   end
 
   private
+
   def shoes_comment_params
     params.require(:shoes_comment).permit(:comment)
   end

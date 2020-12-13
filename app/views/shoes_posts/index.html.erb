@@ -17,17 +17,20 @@
                     <p>靴名
                       <%= shoes_post.shoes_name.truncate(23) %>
                     </p>
+                    <hr>
                 <% end %>
                     <p>ブランド名
                       <%= shoes_post.brand_name.truncate(23) %>
                     </p>
                   </div>
+                  <hr>
                   <span>
                     <%= shoes_post.shoes_comments.count %>コメント
                   </span>
                   <span>
                     <%= shoes_post.shoes_favorites.count %>いいね
                   </span>
+                  <hr>
                     <p>
                       <%= attachment_image_tag shoes_post.user, :profile_image, :fill, 60, 60, fallback: "noimage.jpg", size:'60x60', class: "img-circle pull-left profile-thumb" %>
                     </p>
@@ -37,6 +40,7 @@
                     <p>投稿日：
                       <%= shoes_post.created_at.strftime("%Y年%m月%d日%H時%M分") %>
                     </p>
+                    <hr>
                     <br>
                     <br>
                     <br>

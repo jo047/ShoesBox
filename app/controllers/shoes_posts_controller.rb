@@ -25,7 +25,6 @@ class ShoesPostsController < ApplicationController
   def show
     @shoes_post = ShoesPost.find(params[:id])
     @shoes_comment = ShoesComment.new
-
   end
 
   def destroy
@@ -35,15 +34,15 @@ class ShoesPostsController < ApplicationController
   end
 
   def set_search
-    #@search = Article.search(params[:q])
-    @search = ShoesPost.ransack(params[:q]) #ransackメソッド推奨
+    # @search = Article.search(params[:q])
+    @search = ShoesPost.ransack(params[:q]) # ransackメソッド推奨
     @search_shoes_posts = @search.result.page(params[:page]).reverse_order
   end
 
   # 投稿データのストロングパラメータ
   private
-  def shoes_post_params
-    params.require(:shoes_post).permit(:shoes_image, :purchase_store, :shoes_name, :brand_name, :shoes_introduction )
-  end
 
+  def shoes_post_params
+    params.require(:shoes_post).permit(:shoes_image, :purchase_store, :shoes_name, :brand_name, :shoes_introduction)
+  end
 end
