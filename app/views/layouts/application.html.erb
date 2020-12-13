@@ -21,8 +21,14 @@
   			</div>
           <div class="collapse navbar-collapse" id="navbarEexample">
             <a class="navbar-brand">
-            <%= link_to shoes_posts_path do %>
-              <%= image_tag 'logo.png', :size =>'200x50' %>
+            <% if user_signed_in? %>
+              <%= link_to shoes_posts_path do %>
+                <%= image_tag 'logo.png', :size =>'200x50' %>
+              <% end %>
+            <% else %>
+              <%= link_to root_path do %>
+                <%= image_tag 'logo.png', :size =>'200x50' %>
+              <% end %>
             <% end %>
             </a>
 			      <ul class="nav navbar-nav  navbar-right">
